@@ -27,4 +27,16 @@
             <dropTable tableName="epaper_requests"/>
         </rollback>
     </changeSet>
+
+    <changeSet id="2" author="gene">
+        <addColumn tableName="epaper_requests">
+            <column name="created_at" type="DATETIME"/>
+            <column name="file_name" type="VARCHAR(100)"/>
+        </addColumn>
+        <addNotNullConstraint tableName="epaper_requests" columnName="created_at" columnDataType="DATETIME"
+                              constraintName="epaper_requests_created_at_NN"/>
+        <rollback>
+            <dropColumn tableName="epaper_requests" columnName="created_at"/>
+        </rollback>
+    </changeSet>
 </databaseChangeLog>

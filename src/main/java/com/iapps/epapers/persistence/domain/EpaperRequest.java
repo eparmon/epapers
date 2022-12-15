@@ -2,6 +2,9 @@ package com.iapps.epapers.persistence.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -27,5 +30,12 @@ public class EpaperRequest {
 
     @Column(name = "screen_dpi")
     private Integer screenDpi;
+
+    @Column(name = "file_name")
+    private String fileName;
+
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createdAt;
 
 }
