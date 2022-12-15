@@ -1,4 +1,15 @@
 services:
+  mariadb:
+    image: mariadb
+    volumes:
+      - ./mariadb:/var/lib/mysql
+    env_file:
+      - .env
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USERNAME}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
   epapers:
     container_name: epapers
     build:
@@ -14,9 +25,3 @@ services:
       - .env
     depends_on:
       - mariadb
-  mariadb:
-    image: mariadb
-    volumes:
-      - ./mariadb:/var/lib/mysql
-    env_file:
-      - .env
