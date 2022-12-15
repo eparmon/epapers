@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.17.xsd">
+    <changeSet id="1" author="gene">
+        <createTable tableName="epaper_requests">
+            <column name="id" type="BIGINT UNSIGNED" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="epaper_requests_id_PK"/>
+            </column>
+            <column name="newspaper_name" type="VARCHAR(256)">
+                <constraints nullable="false" notNullConstraintName="epaper_requests_newspaper_name_NN"/>
+            </column>
+            <column name="screen_width" type="SMALLINT UNSIGNED">
+                <constraints nullable="false" notNullConstraintName="epaper_requests_screen_width_NN"/>
+            </column>
+            <column name="screen_height" type="SMALLINT UNSIGNED">
+                <constraints nullable="false" notNullConstraintName="epaper_requests_screen_height_NN"/>
+            </column>
+            <column name="screen_dpi" type="SMALLINT UNSIGNED">
+                <constraints nullable="false" notNullConstraintName="epaper_requests_screen_dpi_NN"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="epaper_requests"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

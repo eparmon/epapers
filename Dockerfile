@@ -1,9 +1,10 @@
-FROM gradle
+FROM gradle AS build
 WORKDIR /app
 COPY . /app
-CMD gradle clean build
+RUN gradle clean build
 
-FROM alpine
+FROM openjdk:17-alpine
 WORKDIR /app
-COPY --from=0 /app/build/libs/epapers-0.0.1-SNAPSHOT.jar .
+COPY --from=build /app/build/libs/epapers-0.0.1-SNAPSHOT.jar .
+COPY src/main/resources .
 CMD java -jar ./epapers-0.0.1-SNAPSHOT.jar
