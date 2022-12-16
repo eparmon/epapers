@@ -18,7 +18,7 @@ cp .env.sample .env
 
 In a newly created `.env` file, fill the values with desired username, passwords and database name for MariaDB container.
 
-### Build and run
+### Build, test and run
 
 ```shell
 docker-compose up
