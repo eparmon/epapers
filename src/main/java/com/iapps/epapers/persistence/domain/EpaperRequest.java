@@ -1,9 +1,10 @@
 package com.iapps.epapers.persistence.domain;
 
-import jakarta.persistence.*;
+import com.querydsl.core.annotations.QueryEntity;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@QueryEntity
 @Table(name = "epaper_requests")
 public class EpaperRequest {
 

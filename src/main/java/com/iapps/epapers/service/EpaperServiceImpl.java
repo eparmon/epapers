@@ -1,8 +1,11 @@
 package com.iapps.epapers.service;
 
 import com.iapps.epapers.persistence.domain.EpaperRequest;
+import com.iapps.epapers.persistence.predicate.EpaperRequestPredicateBuilder;
 import com.iapps.epapers.persistence.repository.EpaperRequestRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
@@ -26,6 +29,7 @@ public class EpaperServiceImpl implements EpaperService {
     private static final String HEIGHT = "height";
     private static final String DPI = "dpi";
 
+    @Override
     public EpaperRequest parseAndSave(File epaperRequestXml)
             throws ParserConfigurationException, IOException, SAXException {
         return epaperRequestRepository.save(parse(epaperRequestXml));
@@ -43,7 +47,13 @@ public class EpaperServiceImpl implements EpaperService {
                         .getAttributes().getNamedItem(HEIGHT).getNodeValue()))
                 .screenDpi(Integer.parseInt(document.getElementsByTagName(SCREEN_INFO).item(0)
                         .getAttributes().getNamedItem(DPI).getNodeValue()))
+                .fileName(file.getName())
                 .build();
+    }
+
+    @Override
+    public Page<EpaperRequest> getRequests(EpaperRequestPredicateBuilder predicateBuilder, Pageable pageable) {
+        return epaperRequestRepository.findAll(predicateBuilder.build(), pageable);
     }
 
 }
